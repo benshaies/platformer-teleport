@@ -1,17 +1,13 @@
 #include <raylib.h>
+#include "include/game.h"
 
-int main(){
+int main() {
+
+  gameInit(); 
+  while (!WindowShouldClose()) {
   
-  InitWindow(1280, 720, "platformer");
-  SetTargetFPS(60);
+    gameUpdate();
+    gameDraw();
 
-  while(!WindowShouldClose()){
-    BeginDrawing();
-
-    ClearBackground(RAYWHITE);
-
-    DrawRectangle(500, 500, 50, 50, BLACK);
-
-    EndDrawing();
   }
 }
