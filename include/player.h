@@ -1,12 +1,16 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#define GRAVITY 2.5
+
 #include <raylib.h>
-typedef struct{
+typedef struct {
   Rectangle rec;
-
-
-}Player;
+  Vector2 vel;
+  float speed;
+  float groundFriction;
+  bool grounded;
+} Player;
 
 void playerInit(Player *player);
 
