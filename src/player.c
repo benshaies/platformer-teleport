@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 void playerInit(Player *player) {
-  player->rec = (Rectangle){400, 400, 50, 100};
+  player->rec = (Rectangle){600, 100, 50, 100};
   player->vel = (Vector2){0, 0};
   player->grounded = false;
 
@@ -34,40 +34,38 @@ float clmp(float current, float max, float min) {
   }
 }
 
+void playerCollisions(Player *player, Rectangle collisionRec) {
+
+}
+
 void playerUpdate(Player *player) {
 
   /*First update velocity*/
 
   // Gravity adding
+  // if player isnt grounded we add gravity to velY
   if (!player->grounded) {
     player->vel.y += GRAVITY;
-  } else {
   }
 
   // Sideways movement
-  if (IsKeyDown(KEY_D)) {
-    player->vel.x += player->speed;
-  } else if (IsKeyDown(KEY_A)) {
-    player->vel.x -= player->speed;
-  } else {
-    // Smoothly move vel to zero
-    player->vel.x = MoveToward(player->vel.x, 0, player->groundFriction);
+  if (player->grounded) {
+
+    if (IsKeyDown(KEY_D)) {
+      player->vel.x += player->speed;
+    } else if (IsKeyDown(KEY_A)) {
+      player->vel.x -= player->speed;
+    } else {
+      // Smoothly move vel to zero
+      player->vel.x = MoveToward(player->vel.x, 0, player->groundFriction);
+    }
+
+    player->vel.x = clmp(player->vel.x, 10, -10);
   }
 
-  // Jumping
-  if (IsKeyPressed(KEY_SPACE) && player->grounded) {
-    player->vel.y = 15;
-    player->grounded = false;
-  }
-
-  player->vel.x = clmp(player->vel.x, 10, -10);
-
-  // Update position based on velocity
-  if (player->rec.y <= 720 - player->rec.height) {
-    player->rec.y += player->vel.y;
-  }
 
   player->rec.x += player->vel.x;
+  player->rec.y += player->vel.y;
 }
 
 void playerDraw(Player player) { DrawRectangleRec(player.rec, BLUE); }

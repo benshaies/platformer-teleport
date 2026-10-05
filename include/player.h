@@ -14,6 +14,8 @@ typedef struct {
 
 void playerInit(Player *player);
 
+void playerCollisions(Player *player, Rectangle collisionRec);
+
 void playerUpdate(Player *player);
 
 void playerDraw(Player player);
