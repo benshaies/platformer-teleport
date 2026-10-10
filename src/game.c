@@ -3,7 +3,9 @@
 #include "../include/player.h"
 
 Player player;
-Rectangle platformRec = {200, 500, 900, 75};
+Rectangle platformRec = {200, 500, 900, 500};
+
+
 
 void gameInit(){
   InitWindow(1280, 720, "platformer");
@@ -13,7 +15,6 @@ void gameInit(){
 } 
 
 void gameUpdate(){
-  playerCollisions(&player, platformRec);
   playerUpdate(&player);
 }
 
@@ -23,7 +24,7 @@ void gameDraw(){
 
   playerDraw(player);
 
-  DrawRectangleRec(platformRec, RED);
+  DrawRectangleRec(platformRec, BROWN);
 
 
   EndDrawing();
