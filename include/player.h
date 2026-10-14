@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#define GRAVITY 10.0
+#define GRAVITY 15
 
 #include <raylib.h>
 typedef struct {
@@ -12,13 +12,13 @@ typedef struct {
   float groundFriction;
   bool grounded;
   bool jumpPressed;
+  float jumpStrenght;
 } Player;
 
-void playerInit(Player *player);
+void playerInit();
 
+void playerUpdate(Rectangle groundRec);
 
-void playerUpdate(Player *player);
-
-void playerDraw(Player player);
+void playerDraw();
 
 #endif // !PLAYER_H

@@ -2,27 +2,24 @@
 #include <raylib.h>
 #include "../include/player.h"
 
-Player player;
 Rectangle platformRec = {200, 500, 900, 500};
-
-
 
 void gameInit(){
   InitWindow(1280, 720, "platformer");
   SetTargetFPS(60);
 
-  playerInit(&player);
+  playerInit();
 } 
 
 void gameUpdate(){
-  playerUpdate(&player);
+  playerUpdate(platformRec);
 }
 
 void gameDraw(){
   ClearBackground(RAYWHITE);
   BeginDrawing();
 
-  playerDraw(player);
+  playerDraw();
 
   DrawRectangleRec(platformRec, BROWN);
 
