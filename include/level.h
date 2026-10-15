@@ -2,6 +2,9 @@
 #define LEVEL_H
 #include <raylib.h>
 
+typedef struct {
+  Rectangle *rec; 
+} Collision;
 
 void levelInit();
 
