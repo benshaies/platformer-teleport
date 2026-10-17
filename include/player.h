@@ -1,7 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+#include "level.h"
 
 #define GRAVITY 15
+
 
 #include <raylib.h>
 typedef struct {
@@ -17,7 +19,7 @@ typedef struct {
 
 void playerInit();
 
-void playerUpdate(Rectangle groundRec);
+void playerUpdate(Collision col);
 
 void playerDraw();
 

@@ -1,37 +1,38 @@
 #include "../include/game.h"
+#include "../include/level.h"
+#include "../include/player.h"
+#include <stdlib.h>
 #include "stdio.h"
 #include <raylib.h>
-#include "../include/player.h"
-#include "../include/level.h"
 
 Rectangle platformRec = {200, 500, 900, 500};
 
-Collision collision;
+Collision col;
 
-void gameInit(){
+
+
+void gameInit() {
   InitWindow(1280, 720, "platformer");
   SetTargetFPS(60);
 
   playerInit();
 
-  collision.rec = malloc(sizeof(Rectangle) * 1);
-
-  collision.rec[0] = platformRec;
-
-} 
-
-void gameUpdate(){
-  playerUpdate(collision.rec[0]);
+  col.rec = malloc(sizeof(Rectangle) * 1);
+  col.num = 1;
+  col.rec[0] = platformRec;
 }
 
-void gameDraw(){
+void gameUpdate() { 
+  playerUpdate(col); 
+}
+
+void gameDraw() {
   ClearBackground(RAYWHITE);
   BeginDrawing();
 
   playerDraw();
 
   DrawRectangleRec(platformRec, BROWN);
-
 
   EndDrawing();
 }

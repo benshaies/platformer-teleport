@@ -82,17 +82,22 @@ void playerMovement() {
   player.rec.y += player.vel.y * GetFrameTime();
 }
 
-void playerCollisions(Rectangle groundRec) {
-  if(CheckCollisionRecs(player.rec, groundRec)){
-    player.grounded = true;
+void playerCollisions(Collision col) {
+
+  for(int i = 0; i < col.num ; i++){
+    if(CheckCollisionRecs(player.rec, col.rec[i])){
+        
+
+    } 
   }
+  
 }
 
-void playerUpdate(Rectangle groundRec) {
+void playerUpdate(Collision col) {
   playerInput();
   velocityUpdate();
   playerMovement();
-  playerCollisions(groundRec);
+  playerCollisions(col);
 
   printf("x: %f y:%f \n", player.vel.x, player.vel.y);
 }
