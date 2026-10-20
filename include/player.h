@@ -2,8 +2,7 @@
 #define PLAYER_H
 #include "level.h"
 
-#define GRAVITY 15
-
+#define GRAVITY 1000
 
 #include <raylib.h>
 typedef struct {

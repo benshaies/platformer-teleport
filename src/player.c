@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 Player player;
+float dt;
 
 void playerInit() {
   player.rec = (Rectangle){600, 1, 50, 100};
@@ -13,10 +14,8 @@ void playerInit() {
   player.jumpPressed = false;
 
   player.speed = 500;
-  player.groundFriction = 1.5f;
-  player.jumpStrenght = -500;
+  player.jumpStrenght = -400;
 
-  player = player;
 }
 
 float MoveToward(float current, float target, float maxDelta) {
@@ -59,76 +58,71 @@ void playerInput() {
 
 void velocityUpdate() {
   float targetX = player.xInput * player.speed;
-  player.vel.x = MoveToward(player.vel.x, targetX, 10.0);
-  player.vel.y += GRAVITY;
+  player.vel.x = MoveToward(player.vel.x, targetX, 2500 * dt);
+
+  player.vel.y += GRAVITY * dt;
 
   if (player.jumpPressed && player.grounded) {
     player.vel.y = player.jumpStrenght;
   }
-
-  player.vel.y = clmp(player.vel.y, 250, player.jumpStrenght);
 }
 
 float moveX(Collision col) {
   for (int i = 0; i < col.num; i++) {
-    float newX = player.rec.x + (player.vel.x * GetFrameTime());
-    Rectangle newRec = {newX, player.rec.y, player.rec.width, player.rec.height};
-    
-    if(CheckCollisionRecs(newRec, col.rec[i])){
-      if(player.vel.x > 0){
+    float newX = player.rec.x + (player.vel.x * dt);
+    Rectangle newRec = {newX, player.rec.y, player.rec.width,
+                        player.rec.height};
+
+    if (CheckCollisionRecs(newRec, col.rec[i])) {
+      if (player.vel.x > 0) {
         player.vel.x = 0;
         return col.rec[i].x - player.rec.width - 0.05;
-      }
-      else if (player.vel.x < 0){
+      } else if (player.vel.x < 0) {
         player.vel.x = 0;
         return col.rec[i].x + col.rec[i].width + 0.05;
       }
     }
   }
 
-  return player.rec.x + (player.vel.x * GetFrameTime());
+  return player.rec.x + (player.vel.x * dt);
 }
 
-float moveY(Collision col){
-  for (int i = 0; i < col.num; i++){
-    float newY = player.rec.y + (player.vel.y * GetFrameTime());
-    Rectangle newRec = {player.rec.x, newY, player.rec.width, player.rec.height};
+float moveY(Collision col) {
+  for (int i = 0; i < col.num; i++) {
+    float newY = player.rec.y + (player.vel.y * dt);
+    Rectangle newRec = {player.rec.x, newY, player.rec.width,
+                        player.rec.height};
 
-    if(CheckCollisionRecs(newRec, col.rec[i])){
-      if(player.vel.y > 0){
+    if (CheckCollisionRecs(newRec, col.rec[i])) {
+      if (player.vel.y > 0) {
         player.vel.y = 0;
         player.grounded = true;
         player.jumpPressed = false;
         return col.rec[i].y - player.rec.height - 0.05;
 
-      }
-      else if(player.vel.y < 0){
+      } else if (player.vel.y < 0) {
         player.vel.y = 0;
         return col.rec[i].y + col.rec[i].height - 0.05;
       }
     }
-
-    player.grounded = false;
-    return player.rec.y + (player.vel.y * GetFrameTime());
   }
+  player.grounded = false;
+  return player.rec.y + (player.vel.y * dt);
 }
 
 void playerMovement(Collision col) {
   player.grounded = false;
 
-  // X Axis
-  //player.rec.x += player.vel.x * GetFrameTime();
   player.rec.x = moveX(col);
 
-  // Y Axis
   player.rec.y = moveY(col);
 }
 
 void playerUpdate(Collision col) {
-  playerInput();
-  velocityUpdate();
-  playerMovement(col);
-
+  dt = GetFrameTime();
+  playerInput(); // Gets player input 
+  velocityUpdate(); // Uses player input to updatye velocity
+  playerMovement(col); // Uses velocity and collision recs to move and resolve collisions
 }
 
 void playerDraw() { DrawRectangleRec(player.rec, BLUE); }
