@@ -15,7 +15,6 @@ void playerInit() {
 
   player.speed = 500;
   player.jumpStrenght = -400;
-
 }
 
 float MoveToward(float current, float target, float maxDelta) {
@@ -68,7 +67,7 @@ void velocityUpdate() {
 }
 
 float moveX(Collision col) {
-  for (int i = 0; i < col.num; i++) {
+  for (int i = 0; i < COL_REC_NUM; i++) {
     float newX = player.rec.x + (player.vel.x * dt);
     Rectangle newRec = {newX, player.rec.y, player.rec.width,
                         player.rec.height};
@@ -88,7 +87,7 @@ float moveX(Collision col) {
 }
 
 float moveY(Collision col) {
-  for (int i = 0; i < col.num; i++) {
+  for (int i = 0; i < COL_REC_NUM; i++) {
     float newY = player.rec.y + (player.vel.y * dt);
     Rectangle newRec = {player.rec.x, newY, player.rec.width,
                         player.rec.height};
@@ -120,9 +119,10 @@ void playerMovement(Collision col) {
 
 void playerUpdate(Collision col) {
   dt = GetFrameTime();
-  playerInput(); // Gets player input 
+  playerInput();    // Gets player input
   velocityUpdate(); // Uses player input to updatye velocity
-  playerMovement(col); // Uses velocity and collision recs to move and resolve collisions
+  playerMovement(
+      col); // Uses velocity and collision recs to move and resolve collisions
 }
 
 void playerDraw() { DrawRectangleRec(player.rec, BLUE); }

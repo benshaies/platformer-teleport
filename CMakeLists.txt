@@ -39,9 +39,12 @@ endif()
 
 # Define source files
 file(GLOB SBLIB_SRC "sblib/src/*.c")
-file(GLOB MAIN_SRC "src/*.c")
+file(GLOB SRC "src/*.c")
+
+
 # Create executable
-add_executable(${PROJECT_NAME} main.c ${SBLIB_SRC} ${MAIN_SRC})
+add_executable(${PROJECT_NAME} main.c ${SBLIB_SRC} ${SRC})
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 # Link libraries
 target_link_libraries(${PROJECT_NAME} ${PLATFORM_LIBS})
