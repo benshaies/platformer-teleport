@@ -75,13 +75,16 @@ float moveX(Collision col) {
     Rectangle newRec = {newX, player.rec.y, player.rec.width,
                         player.rec.height};
 
-    if (CheckCollisionRecs(newRec, col.rec[i])) {
+    Rectangle overlap = GetCollisionRec(newRec, col.rec[i]);
+    
+    // Checks to make sure it is a horizontal collision
+    if (CheckCollisionRecs(newRec, col.rec[i]) && (overlap.height > overlap.width)) {
       if (player.vel.x > 0) {
         player.vel.x = 0;
-        return col.rec[i].x - player.rec.width - 0.05;
+        return col.rec[i].x - player.rec.width;
       } else if (player.vel.x < 0) {
         player.vel.x = 0;
-        return col.rec[i].x + col.rec[i].width + 0.05;
+        return col.rec[i].x + col.rec[i].width;
       }
     }
   }
@@ -98,16 +101,18 @@ float moveY(Collision col) {
     Rectangle newRec = {player.rec.x, newY, player.rec.width,
                         player.rec.height};
 
-    if (CheckCollisionRecs(newRec, col.rec[i])) {
+    Rectangle overlap = GetCollisionRec(newRec, col.rec[i]);
+
+    if (CheckCollisionRecs(newRec, col.rec[i]) && (overlap.width > overlap.height)) {
       if (player.vel.y > 0) {
         player.vel.y = 0;
         player.grounded = true;
         player.jumpPressed = false;
-        return col.rec[i].y - player.rec.height - 0.05;
+        return col.rec[i].y - player.rec.height;
 
       } else if (player.vel.y < 0) {
         player.vel.y = 0;
-        return col.rec[i].y + col.rec[i].height - 0.05;
+        return col.rec[i].y + col.rec[i].height;
       }
     }
   }

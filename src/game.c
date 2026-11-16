@@ -11,7 +11,6 @@ Rectangle otherOtherRec = {800, 100, 100, 100};
 
 //Collision related 
 Collision col;
-SB_IntArray colTileValues;
 
 //Level stuff
 Texture tempTileset;
@@ -25,10 +24,6 @@ void gameInit() {
   playerInit();
 
   //Collision
-  SB_IntArray_Init(&colTileValues, 2);
-  colTileValues.data[0] = 1;
-  colTileValues.data[1] = 2;
-
 
   //Level
   tempTileset = LoadTexture("assets/tempTileset.png");
@@ -39,7 +34,7 @@ void gameInit() {
 }
 
 void gameUpdate() { 
-  col = GetNearbyCollisionRecs(level, player.rec, colTileValues);
+  col = GetNearbyCollisionRecs(level, player.rec);
   playerUpdate(col); 
 }
 
