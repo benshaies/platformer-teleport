@@ -2,7 +2,8 @@
 #define PLAYER_H
 #include "level.h"
 
-#define GRAVITY 1000
+#define GRAVITY 500 
+
 
 #include <raylib.h>
 typedef struct {
@@ -15,6 +16,9 @@ typedef struct {
   bool jumpPressed;
   float jumpStrenght;
 } Player;
+
+extern Player player;
+
 
 void playerInit();
 

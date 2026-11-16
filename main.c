@@ -5,7 +5,6 @@ int main() {
   
   ChangeDirectory(GetApplicationDirectory());
   gameInit(); 
-
   while (!WindowShouldClose()) {
   
     gameUpdate();

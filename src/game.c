@@ -32,20 +32,39 @@ void gameInit() {
 
   //Level
   tempTileset = LoadTexture("assets/tempTileset.png");
-  level = SB_Level_Load("levels/testlevel1.sblevel" );
+  level = SB_Level_Load("levels/chunk1.sblevel" );
   tileset = SB_Tileset_Init("assets", level.tilesetName, level.tileSize);
+  levelInit();
 
 }
 
-void gameUpdate() { playerUpdate(col); }
+void gameUpdate() { 
+  col = GetNearbyCollisionRecs(level, player.rec, colTileValues);
+  playerUpdate(col); 
+}
+
+// TEMPORARY
+
+void drawActiveColRecs(){
+  
+  for(int i = 0; i < COL_REC_NUM; i++){
+    if(col.active[i]){
+      DrawRectangleRec(col.rec[i], RED);
+    }
+  }
+
+}
 
 void gameDraw() {
   ClearBackground(RAYWHITE);
   BeginDrawing();
 
-  playerDraw();
 
   SB_Level_Draw(level, tileset, 50, 50, -1);
+    playerDraw();
+
+
+  drawActiveColRecs();
 
   EndDrawing();
 }

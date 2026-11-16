@@ -2,7 +2,7 @@
 #include <raylib.h>
 #include <stdio.h>
 
-Player player;
+ Player player;
 float dt;
 
 void playerInit() {
@@ -13,7 +13,7 @@ void playerInit() {
   player.grounded = false;
   player.jumpPressed = false;
 
-  player.speed = 500;
+  player.speed = 100;
   player.jumpStrenght = -400;
 }
 
@@ -68,6 +68,9 @@ void velocityUpdate() {
 
 float moveX(Collision col) {
   for (int i = 0; i < COL_REC_NUM; i++) {
+    if(!col.active[i]){
+      continue;
+    }
     float newX = player.rec.x + (player.vel.x * dt);
     Rectangle newRec = {newX, player.rec.y, player.rec.width,
                         player.rec.height};
@@ -88,6 +91,9 @@ float moveX(Collision col) {
 
 float moveY(Collision col) {
   for (int i = 0; i < COL_REC_NUM; i++) {
+    if(!col.active[i]){
+      continue;
+    }
     float newY = player.rec.y + (player.vel.y * dt);
     Rectangle newRec = {player.rec.x, newY, player.rec.width,
                         player.rec.height};

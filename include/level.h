@@ -9,7 +9,16 @@
 
 typedef struct{
   Rectangle rec[COL_REC_NUM];
+  bool active[COL_REC_NUM];
 }Collision;
+
+
+
+
+typedef struct{
+  int x;
+  int y;
+}IVec2;
 
 
 void levelInit();
@@ -18,7 +27,7 @@ void levelUpdate();
 
 void levelDraw();
 
-Collision GetNearbyCollisionRecs(SB_Level level, Rectangle playerRec);
+Collision GetNearbyCollisionRecs(SB_Level level, Rectangle playerRec, SB_IntArray colTileValues);
 
 
 #endif // !LEVEL_H
