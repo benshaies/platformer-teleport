@@ -5,9 +5,10 @@
 #include <raylib.h>
 #include <stdlib.h>
 
-Rectangle platformRec = {200, 500, 900, 500};
-Rectangle otherRec = {200, 100, 100, 100};
-Rectangle otherOtherRec = {800, 100, 100, 100};
+
+Game game;
+
+RenderTexture2D target;
 
 //Collision related 
 Collision col;
@@ -17,9 +18,18 @@ Texture tempTileset;
 SB_Level level;
 SB_Tileset tileset;
 
+Vector2 mousePos;
+
+void checkPlayerMouseClick(){
+}
+
 void gameInit() {
   InitWindow(1280, 720, "platformer");
   SetTargetFPS(60);
+
+
+  target = LoadRenderTexture(1280, 720);
+
 
   playerInit();
 
@@ -34,32 +44,26 @@ void gameInit() {
 }
 
 void gameUpdate() { 
+  mousePos = SB_GameResolution_GetMouse((Vector2){1280, 720});
   col = GetNearbyCollisionRecs(level, player.rec);
   playerUpdate(col); 
-}
-
-// TEMPORARY
-
-void drawActiveColRecs(){
-  
-  for(int i = 0; i < COL_REC_NUM; i++){
-    if(col.active[i]){
-      DrawRectangleRec(col.rec[i], RED);
-    }
-  }
 
 }
 
 void gameDraw() {
-  ClearBackground(RAYWHITE);
-  BeginDrawing();
+  BeginTextureMode(target);
 
+    ClearBackground(SKYBLUE);
 
-  SB_Level_Draw(level, tileset, 50, 50, -1);
+    SB_Level_Draw(level, tileset, 50, 50, -1);
     playerDraw();
 
+    drawActiveColRecs();
 
-  drawActiveColRecs();
+  EndTextureMode();
 
-  EndDrawing();
+  SB_GameResolution_Draw((Vector2){1280, 720}, &target);
+
+
+
 }

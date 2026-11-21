@@ -6,11 +6,6 @@
 IVec2 checkIndex[10];
 SB_IntArray solidBlockList;
 
-
-
-
-
-
 void levelInit() {
 
   // Collision check indexes
@@ -38,17 +33,12 @@ void levelUpdate() {}
 void levelDraw() {}
 
 bool isSolidBlock(int value){
-  
-  for(int i = 0; i < solidBlockList.size; i++){
-    if(solidBlockList.data[i] != value){
-      continue;
-    }
-
+  if(blockDefs[value].solid){
     return true;
-    
   }
-  return false;
-
+  else{
+    return false;
+  }
 }
 
 Collision GetNearbyCollisionRecs(SB_Level level, Rectangle playerRec){

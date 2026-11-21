@@ -30,8 +30,10 @@ typedef struct{
   bool solid;
 }BlockDef;
 
-static const BlockDef blockDefs[BLOCK_COUNT] = {
-  
+static BlockDef blockDefs[BLOCK_COUNT] = {
+  [BLOCK_DIRT] = {"dirt", true},
+  [BLOCK_GRASS] = {"grass", true},
+  [BLOCK_STONE] = {"stone", true},
 };
 
 
@@ -42,6 +44,8 @@ void levelUpdate();
 void levelDraw();
 
 Collision GetNearbyCollisionRecs(SB_Level level, Rectangle playerRec);
+
+void destroyTile(SB_Level level, IVec2 index);
 
 
 #endif // !LEVEL_H

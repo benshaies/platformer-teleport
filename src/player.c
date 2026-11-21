@@ -2,11 +2,11 @@
 #include <raylib.h>
 #include <stdio.h>
 
- Player player;
+Player player;
 float dt;
 
 void playerInit() {
-  player.rec = (Rectangle){600, 1, 50, 100};
+  player.rec = (Rectangle){600, 1, 45, 100};
   player.vel = (Vector2){0, 0};
   player.xInput = 0;
 
@@ -52,6 +52,14 @@ void playerInput() {
 
   if (IsKeyPressed(KEY_SPACE)) {
     player.jumpPressed = true;
+  }
+
+  //Check mouse click
+  if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+    return true; 
+  }
+  else{
+    return false;
   }
 }
 
@@ -132,8 +140,7 @@ void playerUpdate(Collision col) {
   dt = GetFrameTime();
   playerInput();    // Gets player input
   velocityUpdate(); // Uses player input to updatye velocity
-  playerMovement(
-      col); // Uses velocity and collision recs to move and resolve collisions
+  playerMovement(col); // Uses velocity and collision recs to move and resolve collisions
 }
 
-void playerDraw() { DrawRectangleRec(player.rec, BLUE); }
+void playerDraw() { DrawRectangleRec(player.rec, BLACK); }
