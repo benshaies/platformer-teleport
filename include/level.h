@@ -45,7 +45,7 @@ void levelDraw();
 
 Collision GetNearbyCollisionRecs(SB_Level level, Rectangle playerRec);
 
-void destroyTile(SB_Level level, IVec2 index);
+bool destroyTile(SB_Level *level, IVec2 index);
 
 
 #endif // !LEVEL_H

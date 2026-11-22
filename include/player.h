@@ -3,6 +3,7 @@
 #include "level.h"
 
 #define GRAVITY 500 
+#define RADIUS 300
 
 
 #include <raylib.h>
@@ -15,6 +16,8 @@ typedef struct {
   bool grounded;
   bool jumpPressed;
   float jumpStrenght;
+
+  // Interaction
 } Player;
 
 extern Player player;

@@ -19,8 +19,17 @@ SB_Level level;
 SB_Tileset tileset;
 
 Vector2 mousePos;
+IVec2 playerClickIndex = {0,0};
 
 void checkPlayerMouseClick(){
+
+  if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+    playerClickIndex.x = mousePos.x / DRAW_TILE_SIZE;
+    playerClickIndex.y = mousePos.y / DRAW_TILE_SIZE;
+
+    destroyTile(&level, playerClickIndex);
+  }
+
 }
 
 void gameInit() {
@@ -48,6 +57,8 @@ void gameUpdate() {
   col = GetNearbyCollisionRecs(level, player.rec);
   playerUpdate(col); 
 
+  checkPlayerMouseClick();
+
 }
 
 void gameDraw() {
@@ -57,8 +68,6 @@ void gameDraw() {
 
     SB_Level_Draw(level, tileset, 50, 50, -1);
     playerDraw();
-
-    drawActiveColRecs();
 
   EndTextureMode();
 

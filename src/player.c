@@ -54,13 +54,6 @@ void playerInput() {
     player.jumpPressed = true;
   }
 
-  //Check mouse click
-  if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-    return true; 
-  }
-  else{
-    return false;
-  }
 }
 
 void velocityUpdate() {

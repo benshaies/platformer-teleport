@@ -78,6 +78,14 @@ Collision GetNearbyCollisionRecs(SB_Level level, Rectangle playerRec){
  
 }
 
+bool destroyTile(SB_Level *level, IVec2 index){
+  if(isSolidBlock(level->layer->data[index.y][index.x])){
+    level->layer->data[index.y][index.x] = BLOCK_AIR;
+    return true;
+  }
+  
+}
+
 
 
 
