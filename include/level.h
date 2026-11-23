@@ -28,14 +28,14 @@ typedef enum{
 typedef struct{
   const char *name;
   bool solid;
+  int health;
 }BlockDef;
 
 static BlockDef blockDefs[BLOCK_COUNT] = {
-  [BLOCK_DIRT] = {"dirt", true},
-  [BLOCK_GRASS] = {"grass", true},
-  [BLOCK_STONE] = {"stone", true},
+  [BLOCK_DIRT] = {"dirt", true, 4},
+  [BLOCK_GRASS] = {"grass", true, 4},
+  [BLOCK_STONE] = {"stone", true, 10},
 };
-
 
 void levelInit();
 

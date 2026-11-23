@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 IVec2 checkIndex[10];
-SB_IntArray solidBlockList;
 
 void levelInit() {
 
@@ -19,12 +18,6 @@ void levelInit() {
   checkIndex[7] = (IVec2){1, -1};  // top-right
   checkIndex[8] = (IVec2){-1, 2};  // bottom-left
   checkIndex[9] = (IVec2){1, 2};   // bottom-right
-  
-  // Solid block list
-  SB_IntArray_Init(&solidBlockList, 2);
-  solidBlockList.data[0] = 1;
-  solidBlockList.data[1] = 2;
-
 
 }
 
@@ -72,7 +65,6 @@ Collision GetNearbyCollisionRecs(SB_Level level, Rectangle playerRec){
         }
     } 
   }
-  
 
   return col;
  
