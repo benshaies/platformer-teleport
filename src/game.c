@@ -14,10 +14,7 @@ RenderTexture2D target;
 Collision col;
 
 //Level stuff
-SB_Level chunk1;
-SB_IntArray2D chunk1BlockHealth;
-
-SB_Level *currentChunk;
+SB_Level world;
 
 SB_Tileset tileset;
 
@@ -32,7 +29,7 @@ void checkPlayerMouseClick(){
     playerClickIndex.x = mousePos.x / DRAW_TILE_SIZE;
     playerClickIndex.y = mousePos.y / DRAW_TILE_SIZE;
 
-    destroyTile(currentChunk, playerClickIndex);
+    destroyTile(&world, playerClickIndex);
   }
 
 }
@@ -53,10 +50,9 @@ void gameInit() {
   //Collision
 
   //Level
-  chunk1 = SB_Level_Load("levels/chunk1.sblevel" );
-  tileset = SB_Tileset_Init("assets", chunk1.tilesetName, chunk1.tileSize);
+  world = SB_Level_Load("levels/world.sblevel" );
+  tileset = SB_Tileset_Init("assets", world.tilesetName, world.tileSize);
 
-  currentChunk = &chunk1;
 
   levelInit();
 
@@ -64,7 +60,7 @@ void gameInit() {
 
 void gameUpdate() { 
   mousePos = SB_GameResolution_GetMouse((Vector2){1280, 720});
-  col = GetNearbyCollisionRecs(*currentChunk, player.rec);
+  col = GetNearbyCollisionRecs(world, player.rec);
   playerUpdate(col); 
 
   cam.target = (Vector2){player.rec.x, player.rec.y};
@@ -82,7 +78,8 @@ void gameDraw() {
 
       ClearBackground(SKYBLUE);
 
-      SB_Level_Draw(*currentChunk, tileset, 50, 50, -1);
+      //SB_Level_Draw(world, tileset, 50, 50, -1);
+      SB_Level_Draw_Visible(world, tileset, DRAW_TILE_SIZE, DRAW_TILE_SIZE, 1, (Rectangle){0, 0, 1280, 720});
       playerDraw();
 
     EndMode2D();
