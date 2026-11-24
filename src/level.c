@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 IVec2 checkIndex[10];
+SB_IntArray solidBlockList;
 
 void levelInit() {
 

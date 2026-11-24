@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include "level.h"
 
-#define GRAVITY 0
+#define GRAVITY 500
 #define RADIUS 300
 
 

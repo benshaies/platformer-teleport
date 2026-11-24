@@ -5,7 +5,7 @@
 
 //MACROS
 #define COL_REC_NUM 24
-#define DRAW_TILE_SIZE 50
+#define DRAW_TILE_SIZE 50 
 #define BLOCK_COUNT 3
 
 typedef struct{
