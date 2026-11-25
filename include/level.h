@@ -37,11 +37,12 @@ static BlockDef blockDefs[BLOCK_COUNT] = {
   [BLOCK_STONE] = {"stone", true, 10},
 };
 
+void generateWorld(SB_Level *level);
+
 void levelInit();
 
 void levelUpdate();
 
-void levelDraw();
 
 Collision GetNearbyCollisionRecs(SB_Level level, Rectangle playerRec);
 

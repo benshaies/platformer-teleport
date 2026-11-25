@@ -6,6 +6,10 @@
 IVec2 checkIndex[10];
 SB_IntArray solidBlockList;
 
+void generateWorld(SB_Level *level){
+  
+}
+
 void levelInit() {
 
   // Collision check indexes

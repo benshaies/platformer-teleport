@@ -38,9 +38,12 @@ void checkPlayerMouseClick(){
 }
 
 void fillWorld(){
-  for(int y = 0; y < world.layer->rows; y++){
-    for(int x = 0; x < world.layer->cols; x++){
-      world.layer->data[y][x] = 2;
+  for(int y = 0; y < world.layer[0].rows; y++){
+    for(int x = 0; x < world.layer[0].cols; x++){
+      
+      if(y > 20){
+        world.layer[0].data[y][x] = GetRandomValue(0, 2);
+      }
     }
   }
 }
@@ -62,6 +65,7 @@ void gameInit() {
   world = SB_Level_Load("levels/world.sblevel" );
   tileset = SB_Tileset_Init("assets", world.tilesetName, world.tileSize);
 
+  fillWorld();
 
 
   levelInit();
@@ -80,8 +84,8 @@ void gameUpdate() {
   visibleArea = (Rectangle){
     cameraStart.x - 500,
     cameraStart.y - 500,
-    SCREEN_WIDTH + 500 / cam.zoom,
-    SCREEN_HEIGHT + 500 / cam.zoom,
+    (SCREEN_WIDTH + 1000) / cam.zoom,
+    (SCREEN_HEIGHT + 1000) / cam.zoom,
   };
 
   checkPlayerMouseClick();
@@ -89,13 +93,13 @@ void gameUpdate() {
 }
 
 void gameDraw() {
+
   BeginTextureMode(target);
 
     BeginMode2D(cam);
 
       ClearBackground(SKYBLUE);
       
-//    SB_Level_Draw(world, tileset, DRAW_TILE_SIZE, DRAW_TILE_SIZE, -1);
       SB_Level_Draw_Visible(world, tileset, DRAW_TILE_SIZE, DRAW_TILE_SIZE, -1, visibleArea);
 
 
@@ -105,6 +109,9 @@ void gameDraw() {
     EndMode2D();
 
   EndTextureMode();
+
+
+
 
   SB_GameResolution_Draw((Vector2){1280, 720}, &target);
 
