@@ -37,17 +37,6 @@ void checkPlayerMouseClick(){
 
 }
 
-void fillWorld(){
-  for(int y = 0; y < world.layer[0].rows; y++){
-    for(int x = 0; x < world.layer[0].cols; x++){
-      
-      if(y > 20){
-        world.layer[0].data[y][x] = GetRandomValue(0, 2);
-      }
-    }
-  }
-}
-
 void gameInit() {
   InitWindow(1280, 720, "platformer");
   SetTargetFPS(60);
@@ -64,8 +53,8 @@ void gameInit() {
   //Level
   world = SB_Level_Load("levels/world.sblevel" );
   tileset = SB_Tileset_Init("assets", world.tilesetName, world.tileSize);
-
-  fillWorld();
+  
+  generateWorld(&world);
 
 
   levelInit();
@@ -79,6 +68,14 @@ void gameUpdate() {
   
   // Updating camera and the visibleArea
   cam.target = (Vector2){player.rec.x, player.rec.y};
+  if(IsKeyPressed(KEY_DOWN) && cam.zoom > 0.15){
+    cam.zoom -= 0.05;
+  }
+  else if(IsKeyPressed(KEY_UP) && cam.zoom < 2){
+    cam.zoom += 0.05;
+  }
+
+
   mousePos = GetScreenToWorld2D(mousePos, cam);
   Vector2 cameraStart = GetScreenToWorld2D((Vector2){0,0}, cam);
   visibleArea = (Rectangle){
@@ -107,6 +104,8 @@ void gameDraw() {
 
 
     EndMode2D();
+
+  DrawFPS(0, 0);
 
   EndTextureMode();
 

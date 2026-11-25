@@ -6,14 +6,14 @@ Player player;
 float dt;
 
 void playerInit() {
-  player.rec = (Rectangle){600, 1, 45, 100};
+  player.rec = (Rectangle){5000, 1, 45, 100};
   player.vel = (Vector2){0, 0};
   player.xInput = 0;
 
   player.grounded = false;
   player.jumpPressed = false;
 
-  player.speed = 100;
+  player.speed = 250;
   player.jumpStrenght = -400;
 }
 

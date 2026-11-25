@@ -8,6 +8,40 @@ SB_IntArray solidBlockList;
 
 void generateWorld(SB_Level *level){
   
+  for(int y = 0; y < level->layer[0].rows; y++){
+    for(int x = 0; x < level->layer[0].cols; x++){
+      
+      if(y >= 10  && y <= 30){
+        int ran = GetRandomValue(0, 2);
+        int tileValue = BLOCK_GRASS;
+
+        if(ran == 2){
+          tileValue = BLOCK_DIRT;
+        }
+        level->layer->data[y][x] = tileValue;
+
+      }
+      else if(y > 30 && y <= 300){
+        int ran = GetRandomValue(1, 4);
+        int tileValue = 0;
+
+        if(ran == 4){
+          tileValue = BLOCK_STONE;
+        }
+        level->layer->data[y][x] = tileValue;
+      }
+      else if(y > 300) {
+        int ran = GetRandomValue(1, 4);
+        int tileValue = BLOCK_STONE;
+
+        if(ran == 4){
+          tileValue = BLOCK_DIRT;
+        }
+
+        level->layer->data[y][x] = tileValue;
+      }
+    }
+  }
 }
 
 void levelInit() {
