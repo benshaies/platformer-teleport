@@ -65,6 +65,7 @@ void gameUpdate() {
   mousePos = SB_GameResolution_GetMouse((Vector2){SCREEN_WIDTH, SCREEN_HEIGHT});
   col = GetNearbyCollisionRecs(world, player.rec);
   playerUpdate(col); 
+
   
   // Updating camera and the visibleArea
   cam.target = (Vector2){player.rec.x, player.rec.y};

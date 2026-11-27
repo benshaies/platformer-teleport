@@ -54,6 +54,8 @@ void playerInput() {
     player.jumpPressed = true;
   }
 
+  printf("%f\n", player.rec.y);
+
 }
 
 void velocityUpdate() {
